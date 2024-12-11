@@ -15,5 +15,5 @@ public class RentalDbContext : DbContext
     public DbSet<Brand> Brands { get; set; }
     public DbSet<RentingCenter> Centers { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<UserHistory> UserHistories { get; set; }
+    public DbSet<Order> Orders { get; set; }
 }

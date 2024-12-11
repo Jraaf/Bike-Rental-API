@@ -1,5 +1,6 @@
 using API.DAL.EF;
 using API.DAL.Entities;
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddAuthenticationServices(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 var app = builder.Build();
 

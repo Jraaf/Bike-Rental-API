@@ -11,11 +11,11 @@ public class Bike
     public string PhotoUrl { get; set; }
     [Column(TypeName = "decimal(5, 2)")]
     public decimal PricePerHour { get; set; }
-    public BikeState State { get; set; }
+    public BikeState State { get; set; } = BikeState.Available;
     public int BikeModelId { get; set; }
     public int RentingCenterId { get; set; }
     public BikeModel BikeModel { get; set; }
-    public ICollection<UserHistory> UserHistories { get; set; }
+    public ICollection<Order> Orders { get; set; }
 }
 public enum BikeState
 {
