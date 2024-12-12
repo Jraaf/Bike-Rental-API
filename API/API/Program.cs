@@ -1,3 +1,4 @@
+using API.BLL;
 using API.DAL.EF;
 using API.DAL.Entities;
 using API.Extensions;
@@ -15,10 +16,11 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAuthenticationServices(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+builder.Services.AddSwaggerAuthenticationUi();
 
 var app = builder.Build();
 

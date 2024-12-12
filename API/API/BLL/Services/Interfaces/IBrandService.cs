@@ -1,6 +1,11 @@
-﻿namespace API.BLL.Services.Interfaces
+﻿using API.BLL.DTO;
+using API.BLL.Services.Base;
+using API.Controllers;
+using API.DAL.Entities;
+
+namespace API.BLL.Services.Interfaces
 {
-    public interface IBrandService
+    public interface IBrandService : ICrud<Brand, CreateBrandDTO>
     {
     }
 }
