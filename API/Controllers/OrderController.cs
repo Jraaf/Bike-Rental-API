@@ -1,6 +1,7 @@
 ﻿using API.BLL.DTO;
 using API.BLL.Exceptions;
 using API.BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class OrderController(IOrderService _service) : ControllerBase
 {
     [HttpGet("GetAll")]

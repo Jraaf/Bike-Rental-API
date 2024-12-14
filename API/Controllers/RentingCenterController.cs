@@ -2,6 +2,7 @@
 using API.BLL.Exceptions;
 using API.BLL.Services.Interfaces;
 using API.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class RentingCenterController(IRentingCenterService _service) : ControllerBase
 {
     [HttpGet("GetAll")]
