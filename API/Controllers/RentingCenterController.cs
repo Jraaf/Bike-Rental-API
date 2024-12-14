@@ -8,7 +8,7 @@ namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class IRentingCenterController(IRentingCenterService _service) : ControllerBase
+public class RentingCenterController(IRentingCenterService _service) : ControllerBase
 {
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()

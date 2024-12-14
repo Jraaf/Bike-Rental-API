@@ -14,6 +14,7 @@ public static class ServiceExtensions
         services.AddScoped<IBikeRepository, BikeRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOrderRepository,OrderRepository>();
         services.AddScoped<IRentingCenterRepository, RentingCenterRepository>();
         return services;
     }
@@ -23,6 +24,7 @@ public static class ServiceExtensions
         services.AddScoped<IBikeService, BikeService>();
         services.AddScoped<IBrandService, BrandService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IOrderService,OrderService>();
         services.AddScoped<IRentingCenterService, RentingCenterService>();
         return services;
     }

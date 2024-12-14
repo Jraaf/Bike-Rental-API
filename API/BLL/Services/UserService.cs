@@ -53,6 +53,7 @@ public class UserService(IUserRepository _repo, IConfiguration _config, IMapper 
         User user = new User()
         {
             Username = dto.Username,
+            Email = dto.Email,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password)),
             PasswordSalt = hmac.Key
         };
@@ -80,7 +81,7 @@ public class UserService(IUserRepository _repo, IConfiguration _config, IMapper 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddDays(1),
+            Expires = DateTime.UtcNow.AddDays(180),
             SigningCredentials = credentials
         };
 
