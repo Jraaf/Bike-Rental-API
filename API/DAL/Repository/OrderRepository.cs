@@ -18,8 +18,8 @@ public class OrderRepository : Repo<Order, int>, IOrderRepository
     public async new Task<List<Order>> GetAllAsync()
     {
         return await context.Orders
-                    .Include(o=>o.User)
-                    .Include(o=>o.Bike)
+                    .Include(o => o.User)
+                    .Include(o => o.Bike)
                     .ToListAsync();
     }
     public async new Task<Order?> GetAsync(int Id)
@@ -28,5 +28,13 @@ public class OrderRepository : Repo<Order, int>, IOrderRepository
                     .Include(o => o.User)
                     .Include(o => o.Bike)
                     .FirstOrDefaultAsync(o => o.Id == Id);
+    }
+
+    public async Task<List<Order>> GetByBikeId(int bikeId)
+    {
+        return await context.Orders
+            .Include(o => o.User)
+            .Where(o => o.BikeId == bikeId)
+            .ToListAsync();
     }
 }

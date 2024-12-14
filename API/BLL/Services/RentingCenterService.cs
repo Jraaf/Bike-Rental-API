@@ -9,9 +9,18 @@ namespace API.BLL.Services;
 
 public class RentingCenterService : Crud<RentingCenter, CreateRentingCenterDTO>, IRentingCenterService
 {
+    private readonly IMapper mapper;
+    private readonly IRentingCenterRepository repo;
+
     public RentingCenterService(IMapper mapper, IRentingCenterRepository repo)
         : base(mapper, repo)
     {
+        this.mapper = mapper;
+        this.repo = repo;
+    }
 
+    public async Task<List<RentingCenter>> GetByBikeId(int bikeId)
+    {
+        return await repo.GetByBikeId(bikeId);
     }
 }

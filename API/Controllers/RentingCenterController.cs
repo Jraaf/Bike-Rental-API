@@ -1,6 +1,7 @@
 ﻿using API.BLL.DTO;
 using API.BLL.Exceptions;
 using API.BLL.Services.Interfaces;
+using API.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,6 +50,18 @@ public class RentingCenterController(IRentingCenterService _service) : Controlle
         }
 
         return NoContent();
+    }
+    [HttpGet("AvailableCenters")]
+    public async Task<IActionResult> GetByBikeId(int bikeId)
+    {
+        try
+        {
+            return Ok(await _service.GetByBikeId(bikeId));
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
     [HttpPost("add")]
     public async Task<IActionResult> Post(CreateRentingCenterDTO model)

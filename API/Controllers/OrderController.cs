@@ -50,6 +50,18 @@ public class OrderController(IOrderService _service) : ControllerBase
 
         return NoContent();
     }
+    [HttpGet("GetByBikeId")]
+    public async Task<IActionResult> GetByBikeId(int bikeId)
+    {
+        try
+        {
+            return Ok(await _service.GetByBikeId(bikeId));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
     [HttpPost("add")]
     public async Task<IActionResult> Post(CreateOrderDTO model)
     {

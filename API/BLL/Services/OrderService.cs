@@ -9,9 +9,18 @@ namespace API.BLL.Services;
 
 public class OrderService : Crud<Order, CreateOrderDTO>, IOrderService
 {
+    private readonly IMapper mapper;
+    private readonly IOrderRepository repo;
+
     public OrderService(IMapper mapper, IOrderRepository repo)
         : base(mapper, repo)
     {
+        this.mapper = mapper;
+        this.repo = repo;
+    }
 
+    public async Task<List<Order>> GetByBikeId(int bikeId)
+    {
+        return await repo.GetByBikeId(bikeId);
     }
 }

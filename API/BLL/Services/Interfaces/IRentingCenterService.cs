@@ -6,4 +6,5 @@ namespace API.BLL.Services.Interfaces;
 
 public interface IRentingCenterService : ICrud<RentingCenter, CreateRentingCenterDTO>
 {
+    Task<List<RentingCenter>> GetByBikeId(int bikeId);
 }

@@ -5,4 +5,5 @@ namespace API.DAL.Repository.Interfaces;
 
 public interface IOrderRepository : IRepo<Order, int>
 {
+    Task<List<Order>> GetByBikeId(int bikeId);
 }

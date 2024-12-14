@@ -22,4 +22,13 @@ public class RentingCenterRepository : Repo<RentingCenter, int>, IRentingCenterR
             .Include(c=>c.Bikes)
             .ToListAsync();
     }
+
+    public async Task<List<RentingCenter>> GetByBikeId(int bikeId)
+    {
+        return await context.Centers
+            .Include (c=>c.Bikes)
+            .Where(c=>c.Bikes
+            .Any(b=>b.Id == bikeId))
+            .ToListAsync();
+    }
 }
