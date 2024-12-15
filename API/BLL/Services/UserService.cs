@@ -36,6 +36,7 @@ public class UserService(IUserRepository _repo, IConfiguration _config, IMapper 
         {
             Id = user.Id,
             Username = user.Username,
+            Role = user.Role,
             AccessToken = CreateToken(user),
         };
         return endUser;

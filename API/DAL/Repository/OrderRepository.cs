@@ -1,4 +1,5 @@
-﻿using API.DAL.EF;
+﻿using API.BLL.Exceptions;
+using API.DAL.EF;
 using API.DAL.Entities;
 using API.DAL.Repository.Base;
 using API.DAL.Repository.Interfaces;
@@ -36,5 +37,18 @@ public class OrderRepository : Repo<Order, int>, IOrderRepository
             .Include(o => o.User)
             .Where(o => o.BikeId == bikeId)
             .ToListAsync();
+    }
+    public async new Task<Order> AddAsync(Order entity)
+    {
+        var bike = await context.Bikes.FirstOrDefaultAsync(b => b.Id == entity.BikeId) ?? throw new NotFoundException("Bike not found");
+        if(bike.State != BikeState.Available)
+        {
+            throw new Exception("Bike is not available");
+        }
+        var data = await context.Orders.AddAsync(entity);
+        bike.State = BikeState.InUse;
+        context.Bikes.Update(bike);
+        await context.SaveChangesAsync();
+        return data.Entity;
     }
 }
