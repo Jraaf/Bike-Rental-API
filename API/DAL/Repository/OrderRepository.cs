@@ -3,6 +3,7 @@ using API.DAL.EF;
 using API.DAL.Entities;
 using API.DAL.Repository.Base;
 using API.DAL.Repository.Interfaces;
+using Microsoft.AspNetCore.Components.Server;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.DAL.Repository;
@@ -50,5 +51,13 @@ public class OrderRepository : Repo<Order, int>, IOrderRepository
         context.Bikes.Update(bike);
         await context.SaveChangesAsync();
         return data.Entity;
+    }
+
+    public async Task<List<Order>> GetMyOrders(int userId)
+    {
+        return await context.Orders
+            .Include(o => o.Bike)
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
     }
 }

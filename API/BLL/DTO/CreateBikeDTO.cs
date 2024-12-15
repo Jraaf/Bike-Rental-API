@@ -10,4 +10,5 @@ public class CreateBikeDTO
     public decimal PricePerHour { get; set; }
     public int BikeModelId { get; set; }
     public int RentingCenterId { get; set; }
+    public int State { get; set; }
 }

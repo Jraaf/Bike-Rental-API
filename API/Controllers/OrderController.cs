@@ -1,9 +1,11 @@
 ﻿using API.BLL.DTO;
 using API.BLL.Exceptions;
 using API.BLL.Services.Interfaces;
+using API.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers;
 
@@ -58,6 +60,19 @@ public class OrderController(IOrderService _service) : ControllerBase
         try
         {
             return Ok(await _service.GetByBikeId(bikeId));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+    [HttpGet("GetMyOrders")]
+    public async Task<IActionResult> GetMyOrders()
+    {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        try
+        {
+            return Ok(await _service.GetMyOrders(userId));
         }
         catch (Exception e)
         {

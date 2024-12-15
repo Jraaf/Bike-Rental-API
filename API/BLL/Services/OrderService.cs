@@ -23,4 +23,9 @@ public class OrderService : Crud<Order, CreateOrderDTO>, IOrderService
     {
         return await repo.GetByBikeId(bikeId);
     }
+
+    public async Task<List<Order>> GetMyOrders(int userId)
+    {
+        return await repo.GetMyOrders(userId);
+    }
 }
