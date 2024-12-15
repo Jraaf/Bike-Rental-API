@@ -54,7 +54,7 @@ public class UserService(IUserRepository _repo, IConfiguration _config, IMapper 
         {
             Username = dto.Username,
             Email = dto.Email,
-            Role = (Role)dto.Role,
+            Role = dto.Role == 0 ? Role.Admin : Role.Customer,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password)),
             PasswordSalt = hmac.Key
         };

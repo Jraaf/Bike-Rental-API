@@ -18,10 +18,19 @@ public class BikeRepository : Repo<Bike, int>, IBikeRepository
     public async new Task<List<Bike>> GetAllAsync()
     {
         return await context.Bikes
-            .Include(b=>b.BikeModel)
-                .ThenInclude(b=>b.Brand)
-            .Include(b=>b.RentingCenter)
-            .OrderBy(b=>b.State)
+            .Include(b => b.BikeModel)
+                .ThenInclude(b => b.Brand)
+            .Include(b => b.RentingCenter)
+            .OrderBy(b => b.State)
             .ToListAsync();
+    }
+    public async new Task<Bike?> GetAsync(int id)
+    {
+        return await context.Bikes
+            .Include(b => b.BikeModel)
+                .ThenInclude(b => b.Brand)
+            .Include(b => b.RentingCenter)
+            .OrderBy(b => b.State)
+            .FirstOrDefaultAsync(b => b.Id == id);
     }
 }
