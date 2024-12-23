@@ -23,4 +23,12 @@ public class BikeService : Crud<Bike, CreateBikeDTO>, IBikeService
         }
         return await base.AddAsync(dto);
     }
+    public async new Task<Bike> UpdateByIdAsync(int id, CreateBikeDTO dto)
+    {
+        if (dto.State < 0 || dto.State > 2)
+        {
+            dto.State = 0;
+        }
+        return await base.UpdateByIdAsync(id, dto);
+    }
 }
